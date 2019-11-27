@@ -12,10 +12,18 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>angulardemo</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Demo project for Spring Boot and Angular</description>
 
     <properties>
         <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.11</maven.compiler.source>
+        <maven.compiler.target>1.11</maven.compiler.target>
+        <start-class>com.lanit.springangular.AngulardemoApplication</start-class>
+        <application.name>notebook</application.name>
+
+        <angular.project.location>frontend</angular.project.location>
+        <angular.project.nodeinstallation>node_installation</angular.project.nodeinstallation>
     </properties>
 
     <dependencies>

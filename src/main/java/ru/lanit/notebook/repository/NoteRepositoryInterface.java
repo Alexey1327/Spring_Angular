@@ -1,7 +1,7 @@
-package ru.lanit.angulardemo.notebook.repository;
+package ru.lanit.notebook.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.lanit.angulardemo.notebook.entity.Note;
+import ru.lanit.notebook.entity.Note;
 
 public interface NoteRepositoryInterface extends JpaRepository<Note, Long> {
 

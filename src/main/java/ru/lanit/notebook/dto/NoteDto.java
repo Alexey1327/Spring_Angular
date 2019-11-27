@@ -1,4 +1,4 @@
-package ru.lanit.angulardemo.notebook.dto;
+package ru.lanit.notebook.dto;
 
 import java.time.LocalDate;
 

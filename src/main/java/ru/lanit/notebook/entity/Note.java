@@ -1,4 +1,4 @@
-package ru.lanit.angulardemo.notebook.entity;
+package ru.lanit.notebook.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;

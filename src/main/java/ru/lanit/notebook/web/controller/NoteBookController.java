@@ -1,11 +1,11 @@
-package ru.lanit.angulardemo.notebook.web.controller;
+package ru.lanit.notebook.web.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.lanit.angulardemo.notebook.dto.NoteDto;
-import ru.lanit.angulardemo.notebook.entity.Note;
-import ru.lanit.angulardemo.notebook.repository.NoteRepositoryInterface;
+import ru.lanit.notebook.dto.NoteDto;
+import ru.lanit.notebook.entity.Note;
+import ru.lanit.notebook.repository.NoteRepositoryInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
