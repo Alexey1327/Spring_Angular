@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Todo, TodosService} from "../service/todos.service";
 
 @Component({
   selector: 'app-todo-add-form',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoAddFormComponent implements OnInit {
 
-  constructor() { }
+  title: string = '';
+
+  constructor(private todosService: TodosService) { }
 
   ngOnInit() {
   }
 
+  addTodo() {
+
+    const todo: Todo = {
+      id: Date.now(),
+      title: this.title,
+      completed: false,
+      priority: 0,
+      deadline: new Date()
+    };
+
+    this.todosService.addTodo(todo);
+  }
 }

@@ -32,4 +32,8 @@ export class TodosService {
       .pipe(tap(todos => this.todos = todos))
   }
 
+  addTodo(todo: Todo) {
+    this.todos.push(todo);
+  }
+
 }

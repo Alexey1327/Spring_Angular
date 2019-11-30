@@ -1,1 +1,9 @@
-<p>todo-add-form works!</p>
+<div>
+  <input class="filter"
+    type="text"
+    placeholder="Введите заголовок"
+    [(ngModel)]="title"
+    (keydown.enter)="addTodo()"
+  >
+  <button (click)="addTodo()">Добавить</button>
+</div>
