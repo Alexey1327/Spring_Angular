@@ -9,6 +9,7 @@ import {Todo, TodosService} from "../service/todos.service";
 export class TodoAddFormComponent implements OnInit {
 
   title: string = '';
+  text: string = '';
 
   constructor(private todosService: TodosService) { }
 
@@ -20,6 +21,7 @@ export class TodoAddFormComponent implements OnInit {
     const todo: Todo = {
       id: Date.now(),
       title: this.title,
+      text: this.text,
       done: false,
       priority: 0,
       date: new Date()

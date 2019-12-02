@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 
 export interface Todo {
@@ -12,7 +12,7 @@ export interface Todo {
   date?: Date
 }
 
-const BACKEND_URL = 'http://localhost:8080';
+const BACKEND_URL = 'http://localhost:4200/api';
 
 @Injectable({providedIn: "root"})
 export class TodosService {
@@ -33,14 +33,13 @@ export class TodosService {
   }
 
   fetchTodos() : Observable<Todo[]> {
-    return this.httpClient.get<Todo[]>("https://jsonplaceholder.typicode.com/todos?_limit=10")
+    return this.httpClient.get<Todo[]>(BACKEND_URL + "/get")
       .pipe(tap(todos => this.todos = todos))
   }
 
   addTodo(todo: Todo) {
-    this.httpClient.post("http://localhost:8080/save", JSON.stringify(todo));
-    console.log(JSON.stringify(todo));
+    this.httpClient.post(BACKEND_URL + "/save", JSON.stringify(todo));
     this.todos.push(todo);
+    console.log(JSON.stringify(todo));
   }
-
 }

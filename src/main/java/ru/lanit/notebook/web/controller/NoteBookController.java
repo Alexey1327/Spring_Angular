@@ -6,6 +6,7 @@ import ru.lanit.notebook.dto.NoteDto;
 import ru.lanit.notebook.entity.Note;
 import ru.lanit.notebook.repository.NoteRepositoryInterface;
 import ru.lanit.notebook.request.AddRequest;
+import ru.lanit.notebook.request.DeleteRequest;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class NoteBookController {
         this.noteRepository = noteRepository;
     }
 
-    @GetMapping("/get")
+    @GetMapping("/api/get")
     public ResponseEntity getData() {
 
         List<Note> notes = this.noteRepository.findAll();
@@ -42,7 +43,7 @@ public class NoteBookController {
         return ResponseEntity.ok(noteDtos);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/api/save")
     public ResponseEntity save(
         @Valid @RequestBody AddRequest addRequest
     ) {
@@ -57,12 +58,12 @@ public class NoteBookController {
         return ResponseEntity.ok().body("saved");
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/api/delete")
     public ResponseEntity delete(
-        @RequestParam Long id
+        @RequestBody DeleteRequest request
     ) {
         try {
-            noteRepository.deleteById(id);
+            noteRepository.deleteById(request.getId());
         } catch (Exception ignored) {}
 
         return ResponseEntity.ok().build();
