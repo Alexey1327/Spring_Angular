@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TodosService} from "../service/todos.service";
+import {Todo, TodosService} from "../service/todos.service";
 import {delay} from "rxjs/operators";
 
 @Component({
@@ -10,7 +10,7 @@ import {delay} from "rxjs/operators";
 export class TodoComponent implements OnInit {
 
   private loading: boolean = true;
-  private searchString = ''
+  private searchString = '';
 
   constructor(private todosService: TodosService) { }
 
@@ -30,4 +30,8 @@ export class TodoComponent implements OnInit {
     this.todosService.removeTodo(id)
   }
 
+  detailView(todo: Todo) {
+    this.todosService.isDetailView = true;
+    this.todosService.selectedTodo = todo;
+  }
 }

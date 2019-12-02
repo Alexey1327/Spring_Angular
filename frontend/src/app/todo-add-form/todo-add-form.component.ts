@@ -20,9 +20,9 @@ export class TodoAddFormComponent implements OnInit {
     const todo: Todo = {
       id: Date.now(),
       title: this.title,
-      completed: false,
+      done: false,
       priority: 0,
-      deadline: new Date()
+      date: new Date()
     };
 
     this.todosService.addTodo(todo);

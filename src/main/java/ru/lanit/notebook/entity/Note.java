@@ -16,15 +16,17 @@ public class Note {
     private String text;
     private int priority;
     private LocalDate date;
+    private boolean done;
 
     public Note() {
     }
 
-    public Note(String title, String text, int priority, LocalDate date) {
+    public Note(String title, String text, int priority, LocalDate date, boolean done) {
         this.title = title;
         this.text = text;
         this.priority = priority;
         this.date = date;
+        this.done = done;
     }
 
     public long getId() {
@@ -69,6 +71,15 @@ public class Note {
 
     public Note setDate(LocalDate date) {
         this.date = date;
+        return this;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public Note setDone(boolean done) {
+        this.done = done;
         return this;
     }
 

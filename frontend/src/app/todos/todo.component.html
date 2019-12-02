@@ -1,19 +1,19 @@
 <div class="filter">
   <input
     type="text"
-    placeholder="Быстрый поиск..."
+    placeholder="Быстрый поиск ..."
     [(ngModel)]="searchString"
   >
 </div>
 <div *ngIf="!loading">
   <ul *ngIf="todosService.todos.length; else noTodos">
-    <li *ngFor="let todo of todosService.todos | todosFilter:searchString; let i = index">
-      <span [class.done]="todo.completed">
-        <input type="checkbox" [checked]="todo.completed" (change)="onChangeCompleted(todo.id)">
+    <li *ngFor="let todo of todosService.todos | todosFilter:searchString; let i = index" (click)="detailView(todo)">
+      <span [class.done]="todo.done">
+        <input type="checkbox" [checked]="todo.done" (change)="onChangeCompleted(todo.id)">
         <strong>{{i + 1}}</strong>
       {{todo.title}}
       </span>
-      <small>{{todo.deadline | date:'medium'}}</small>
+      <small>{{todo.date | date:'medium'}}</small>
       <button class="rm" (click)="removeTodo(todo.id)">x</button>
     </li>
   </ul>
@@ -23,4 +23,4 @@
   </ng-template>
 </div>
 
-<div *ngIf="loading">Loading...</div>
+<div *ngIf="loading">Загрузка</div>

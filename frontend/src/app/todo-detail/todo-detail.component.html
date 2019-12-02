@@ -1,0 +1,7 @@
+<span class="go-back" (click)="todosService.isDetailView = false">Назад</span>
+<div class="todo-detail">
+        <span [class.done]="todosService.selectedTodo.done">
+        <input type="checkbox" [checked]="todosService.selectedTodo.done">
+          {{todosService.selectedTodo.title}}
+      </span>
+</div>

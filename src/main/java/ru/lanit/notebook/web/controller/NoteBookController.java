@@ -1,13 +1,13 @@
 package ru.lanit.notebook.web.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.lanit.notebook.dto.NoteDto;
 import ru.lanit.notebook.entity.Note;
 import ru.lanit.notebook.repository.NoteRepositoryInterface;
+import ru.lanit.notebook.request.AddRequest;
 
-import java.time.LocalDate;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +31,10 @@ public class NoteBookController {
                 noteDtos.add(new NoteDto(
                     note.getId(),
                     note.getTitle(),
+                    note.getText(),
                     note.getPriority(),
-                    note.getDate()
+                    note.getDate(),
+                    note.isDone()
                 ));
             }
         }
@@ -40,17 +42,29 @@ public class NoteBookController {
         return ResponseEntity.ok(noteDtos);
     }
 
-
-    @GetMapping("/save")
-    public ResponseEntity save() {
-
+    @PostMapping("/save")
+    public ResponseEntity save(
+        @Valid @RequestBody AddRequest addRequest
+    ) {
         noteRepository.saveAndFlush(new Note(
-            "Заметка",
-            "Бла бла бла",
-            1,
-             LocalDate.now()
+                addRequest.getTitle(),
+                addRequest.getText(),
+                addRequest.getPriority(),
+                addRequest.getDate(),
+                addRequest.isDone()
         ));
 
         return ResponseEntity.ok().body("saved");
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity delete(
+        @RequestParam Long id
+    ) {
+        try {
+            noteRepository.deleteById(id);
+        } catch (Exception ignored) {}
+
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TodosService} from "./service/todos.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular + spring demo application';
+
+  constructor(private todosService: TodosService) { }
+
 }

@@ -6,10 +6,13 @@ import {tap} from "rxjs/operators";
 export interface Todo {
   id: number,
   title: string,
+  text: string,
   priority: number,
-  completed: boolean,
-  deadline?: Date
+  done: boolean,
+  date?: Date
 }
+
+const BACKEND_URL = 'http://localhost:8080';
 
 @Injectable({providedIn: "root"})
 export class TodosService {
@@ -17,10 +20,12 @@ export class TodosService {
   constructor (private httpClient: HttpClient) {}
 
   public todos: Todo[] = [];
+  public isDetailView = false;
+  public selectedTodo: Todo = null;
 
   onToggle(id: number) {
     const idx = this.todos.findIndex(t => t.id === id);
-    this.todos[idx].completed = !this.todos[idx].completed;
+    this.todos[idx].done = !this.todos[idx].done;
   }
 
   removeTodo(id: number) {
@@ -33,6 +38,8 @@ export class TodosService {
   }
 
   addTodo(todo: Todo) {
+    this.httpClient.post("http://localhost:8080/save", JSON.stringify(todo));
+    console.log(JSON.stringify(todo));
     this.todos.push(todo);
   }
 
