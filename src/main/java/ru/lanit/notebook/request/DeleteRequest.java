@@ -1,9 +1,10 @@
 package ru.lanit.notebook.request;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class DeleteRequest {
-    @NotNull
+
+    @NotEmpty
     private long id;
 
     public long getId() {

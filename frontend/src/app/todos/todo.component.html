@@ -7,13 +7,13 @@
 </div>
 <div *ngIf="!loading">
   <ul *ngIf="todosService.todos.length; else noTodos">
-    <li *ngFor="let todo of todosService.todos | todosFilter:searchString; let i = index" (click)="detailView(todo)">
+    <li *ngFor="let todo of todosService.todos | todosFilter:searchString; let i = index">
       <span [class.done]="todo.done">
         <input type="checkbox" [checked]="todo.done" (change)="onChangeCompleted(todo.id)">
-        <strong>{{i + 1}}</strong>
-      {{todo.title}}
+        <strong>{{i + 1}} </strong>
+        <small class="list-name" (click)="detailView(todo)">{{todo.title}}</small>
       </span>
-      <small>{{todo.date | date:'medium'}}</small>
+      <small class="list-name date-cell" (click)="detailView(todo)">{{todo.date | date:'medium'}}</small>
       <button class="rm" (click)="removeTodo(todo.id)">x</button>
     </li>
   </ul>

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 
 export interface Todo {
@@ -29,7 +29,10 @@ export class TodosService {
   }
 
   removeTodo(id: number) {
-    this.todos = this.todos.filter(t => t.id !== id)
+    this.httpClient.post(BACKEND_URL + "/delete", {id: id})
+      .subscribe(response => {
+        this.todos = this.todos.filter(t => t.id !== id);
+      });
   }
 
   fetchTodos() : Observable<Todo[]> {
@@ -38,8 +41,9 @@ export class TodosService {
   }
 
   addTodo(todo: Todo) {
-    this.httpClient.post(BACKEND_URL + "/save", JSON.stringify(todo));
-    this.todos.push(todo);
-    console.log(JSON.stringify(todo));
+    this.httpClient.post(BACKEND_URL + "/save", todo)
+      .subscribe(response => {
+        this.todos.push(todo);
+      });
   }
 }

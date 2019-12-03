@@ -1,9 +1,26 @@
-<div>
-  <input class="filter"
+<div class="add-from-wrapper">
+  <input class="input-title"
     type="text"
     placeholder="Введите заголовок"
     [(ngModel)]="title"
-    (keydown.enter)="addTodo()"
   >
-  <button (click)="addTodo()">Добавить</button>
+  <select [(ngModel)]="priority">
+    <option value="0">Обычный</option>
+    <option value="1">Срочный</option>
+    <option value="2">Попа в огне</option>
+  </select>
+  <input type="date"
+         ngModel="string"
+         required="true"
+         [(ngModel)]="date"
+  >
+  <br/>
+  <div class="input-description">
+  <input
+         type="text"
+         placeholder="Введите описание"
+         [(ngModel)]="text"
+  >
+  </div>
+<button type="submit" (click)="addTodo()">Добавить</button>
 </div>

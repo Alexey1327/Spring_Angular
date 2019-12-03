@@ -10,6 +10,8 @@ export class TodoAddFormComponent implements OnInit {
 
   title: string = '';
   text: string = '';
+  priority: number = 0;
+  date: Date = null;
 
   constructor(private todosService: TodosService) { }
 
@@ -22,11 +24,13 @@ export class TodoAddFormComponent implements OnInit {
       id: Date.now(),
       title: this.title,
       text: this.text,
-      done: false,
-      priority: 0,
-      date: new Date()
+      priority: this.priority,
+      date: this.date,
+      done: false
     };
 
     this.todosService.addTodo(todo);
+    this.title = this.text = this.date = null;
+    this.priority = 0;
   }
 }

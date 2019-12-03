@@ -55,7 +55,7 @@ public class NoteBookController {
                 addRequest.isDone()
         ));
 
-        return ResponseEntity.ok().body("saved");
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/api/delete")

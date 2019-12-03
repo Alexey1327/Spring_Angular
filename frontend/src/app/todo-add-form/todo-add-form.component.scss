@@ -29,27 +29,17 @@ ul {
   text-decoration: line-through;
 }
 
-.rm {
-  $color: red;
-  border-radius: 50%;
-  background: $color;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  width: 20px;
-  height: 20px;
-  transition: .3s all;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background: darken($color, 20%);
+.add-from-wrapper {
+  margin: .5rem 0;
+  button {
+    margin: .5rem 0;
+  }
+  input {
+    margin: .5rem 0;
   }
 }
 
-.filter {
+.input-description {
   display: flex;
   align-items: center;
   width: 100%;
@@ -63,5 +53,12 @@ ul {
     border-radius: 5px;
     outline: none;
     padding: 0 .5rem;
+  }
+}
+
+span .go-back {
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
   }
 }

@@ -28,6 +28,10 @@ ul {
   text-decoration: line-through;
 }
 
+.list-name:hover{
+  cursor: pointer;
+}
+
 .rm {
   $color: red;
   border-radius: 50%;

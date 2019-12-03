@@ -1,20 +1,21 @@
 package ru.lanit.notebook.request;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AddRequest {
 
-    @NotNull
+    @NotEmpty
     private String title;
 
     private String text;
 
-    @NotNull @Max(2)
+    @NotNull @Min(0) @Max(2)
     private int priority;
 
-    @NotNull
     private LocalDate date;
 
     @NotNull
