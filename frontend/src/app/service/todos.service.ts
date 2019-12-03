@@ -17,11 +17,13 @@ const BACKEND_URL = 'http://localhost:4200/api';
 @Injectable({providedIn: "root"})
 export class TodosService {
 
-  constructor (private httpClient: HttpClient) {}
+  readonly priorityList = ['Обычный', 'Срочный', 'Попа в огне'];
 
   public todos: Todo[] = [];
   public isDetailView = false;
   public selectedTodo: Todo = null;
+
+  constructor (private httpClient: HttpClient) {}
 
   onToggle(id: number) {
     const idx = this.todos.findIndex(t => t.id === id);

@@ -1,9 +1,9 @@
 <span class="go-back" (click)="todosService.isDetailView = false">Назад</span>
 <div class="todo-detail">
   <span [class.done]="todosService.selectedTodo.done">
-     {{todosService.selectedTodo.title}}
+    <h3>{{todosService.selectedTodo.title}}</h3>
   </span>
-  <p>{{todosService.selectedTodo.priority}}</p>
+  <h4>{{todosService.selectedTodo.text}}</h4>
+  <p>Приоритет: <strong>{{todosService.priorityList[todosService.selectedTodo.priority]}}</strong></p>
   <p>{{todosService.selectedTodo.date}}</p>
-
 </div>

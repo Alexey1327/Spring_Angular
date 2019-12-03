@@ -1,20 +1,19 @@
 <div class="add-from-wrapper">
+  <div class="input-title-wr">
   <input class="input-title"
     type="text"
     placeholder="Введите заголовок"
     [(ngModel)]="title"
   >
   <select [(ngModel)]="priority">
-    <option value="0">Обычный</option>
-    <option value="1">Срочный</option>
-    <option value="2">Попа в огне</option>
+    <option [value]="idx" *ngFor="let value of todosService.priorityList; let idx = index">Приоритет: {{ value }}</option>
   </select>
   <input type="date"
          ngModel="string"
          required="true"
          [(ngModel)]="date"
   >
-  <br/>
+  </div>
   <div class="input-description">
   <input
          type="text"
