@@ -13,7 +13,8 @@ export interface Todo {
   date?: Date
 }
 
-const BACKEND_URL = 'http://localhost:4200/api';
+const BACKEND_URL = 'http://notebook:8080/api';
+//const BACKEND_URL = 'http://localhost:4200/api';
 
 @Injectable({providedIn: "root"})
 export class TodosService {
