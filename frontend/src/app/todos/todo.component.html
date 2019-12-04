@@ -1,0 +1,27 @@
+<div class="filter">
+  <input
+    type="text"
+    placeholder="Быстрый поиск ..."
+    [(ngModel)]="searchString"
+  >
+</div>
+<div *ngIf="!loading">
+  <ul *ngIf="todosService.todos.length; else noTodos">
+    <li *ngFor="let todo of todosService.todos | todosFilter:searchString; let i = index">
+      <span [class.done]="todo.done" class="title-wr">
+        <input type="checkbox" [checked]="todo.done" (change)="onChangeCompleted(todo.id)">
+        <strong>{{i + 1}} </strong>
+        <small class="list-name" (click)="detailView(todo)">{{todo.title}}</small>
+      </span>
+      <small class="list-name date-cell" (click)="detailView(todo)">{{todo.date | date:'yyyy-MM-dd'}}</small>
+      <small class="priority" (click)="detailView(todo)">{{todosService.priorityList[todo.priority]}}</small>
+      <button class="rm" (click)="removeTodo(todo.id)">x</button>
+    </li>
+  </ul>
+
+  <ng-template #noTodos>
+    <p>Список дел пуст</p>
+  </ng-template>
+</div>
+
+<div *ngIf="loading">Загрузка</div>
