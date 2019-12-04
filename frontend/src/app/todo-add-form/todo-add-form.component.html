@@ -1,25 +1,28 @@
 <div class="add-from-wrapper">
-  <div class="input-title-wr">
-  <input class="input-title"
-    type="text"
-    placeholder="Введите заголовок"
-    [(ngModel)]="title"
-  >
-  <select [(ngModel)]="priority">
-    <option [value]="idx" *ngFor="let value of todosService.priorityList; let idx = index">Приоритет: {{ value }}</option>
-  </select>
-  <input type="date"
-         ngModel="string"
-         required="true"
-         [(ngModel)]="date"
-  >
-  </div>
-  <div class="input-description">
-  <input
-         type="text"
-         placeholder="Введите описание"
-         [(ngModel)]="text"
-  >
-  </div>
-<button type="submit" (click)="addTodo()">Добавить</button>
+<form [formGroup]="todoForm" (submit)="addTodo()">
+    <div class="input-title-wr">
+    <input class="input-title"
+      type="text"
+      [placeholder]="!this.formInvalid? 'Введите  заголовок' : 'Заголовок обязателен!'"
+      formControlName="title"
+    >
+    <select formControlName="priority">
+      <option
+        [value]="idx"
+        *ngFor="let value of todosService.priorityList; let idx = index"
+      >Приоритет: {{ value }}</option>
+    </select>
+    <input type="date"
+           formControlName="date"
+    >
+    </div>
+    <div class="input-description">
+    <input
+           type="text"
+           placeholder="Введите описание"
+           formControlName="text"
+    >
+    </div>
+  <input type="submit" (submit)="addTodo()" value="Добавить">
+</form>
 </div>

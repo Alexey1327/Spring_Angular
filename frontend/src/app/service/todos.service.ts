@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
+import {FormGroup} from "@angular/forms";
 
 export interface Todo {
   id: number,
@@ -42,10 +43,20 @@ export class TodosService {
       .pipe(tap(todos => this.todos = todos))
   }
 
-  addTodo(todo: Todo) {
-    this.httpClient.post(BACKEND_URL + "/save", todo)
+  saveTodo(formData: FormGroup) {
+
+    const todo: Todo = {
+      id: Date.now(),
+      title: formData.get("title").value,
+      text: formData.get("text").value,
+      priority: formData.get("priority").value,
+      date: formData.get("date").value,
+      done: false
+    };
+
+    this.httpClient.post(BACKEND_URL + "/save", formData.value)
       .subscribe(response => {
-        this.todos.push(todo);
+         this.todos.push(todo);
       });
   }
 }

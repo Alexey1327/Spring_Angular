@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoComponent } from './todos/todo.component';
 import {HttpClientModule} from "@angular/common/http";
 import { TodoAddFormComponent } from './todo-add-form/todo-add-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TodosFilterPipe} from "./service/todos-filter.pipe";
 import { TodoDetailComponent } from './todo-detail/todo-detail.component';
 
@@ -22,7 +22,8 @@ import { TodoDetailComponent } from './todo-detail/todo-detail.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

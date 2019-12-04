@@ -1,4 +1,5 @@
 target/
+node_installation/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**

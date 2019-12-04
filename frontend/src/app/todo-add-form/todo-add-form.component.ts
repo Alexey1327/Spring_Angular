@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Todo, TodosService} from "../service/todos.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-todo-add-form',
@@ -8,29 +9,32 @@ import {Todo, TodosService} from "../service/todos.service";
 })
 export class TodoAddFormComponent implements OnInit {
 
-  title: string = '';
-  text: string = '';
-  priority: number = 0;
-  date: Date = null;
+  todoForm: FormGroup;
+  formInvalid: boolean = false;
 
-  constructor(private todosService: TodosService) { }
+  constructor(private todosService: TodosService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    this.createForm();
   }
 
   addTodo() {
+    if (this.todoForm.invalid) {
+      this.formInvalid = true;
+      return;
+    }
 
-    const todo: Todo = {
-      id: Date.now(),
-      title: this.title,
-      text: this.text,
-      priority: this.priority,
-      date: this.date,
-      done: false
-    };
+    this.formInvalid = false;
+    this.todosService.saveTodo(this.todoForm);
+    this.createForm();
+  }
 
-    this.todosService.addTodo(todo);
-    this.title = this.text = this.date = null;
-    this.priority = 0;
+  private createForm() {
+    this.todoForm = this.formBuilder.group({
+      title: [null, Validators.required],
+      text: [''],
+      priority: ['0'],
+      date: [''],
+    });
   }
 }
