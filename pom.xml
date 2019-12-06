@@ -27,6 +27,30 @@
         <angular.project.nodeinstallation>node_installation</angular.project.nodeinstallation>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>production</id>
+            <properties>
+                <application.global.loglevel>INFO</application.global.loglevel>
+                <application.spring.activeProfile>production</application.spring.activeProfile>
+                <mvn.packaging>war</mvn.packaging>
+                <frontend.build.command>buildProduction</frontend.build.command>
+            </properties>
+        </profile>
+        <profile>
+            <id>development</id>
+            <properties>
+                <application.global.loglevel>DEBUG</application.global.loglevel>
+                <application.spring.activeProfile>development</application.spring.activeProfile>
+                <mvn.packaging>jar</mvn.packaging>
+                <frontend.build.command>build</frontend.build.command>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,7 +60,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -72,7 +99,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
 
             <plugin>
                 <groupId>com.github.eirslett</groupId>
