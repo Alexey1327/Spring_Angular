@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import {FormGroup} from "@angular/forms";
+import {environment} from "../../environments/environment";
 
 export interface Todo {
   id: number,
@@ -12,9 +13,6 @@ export interface Todo {
   done: boolean,
   date?: Date
 }
-
-const BACKEND_URL = 'http://notebook:8080/api';
-//const BACKEND_URL = 'http://localhost:4200/api';
 
 @Injectable({providedIn: "root"})
 export class TodosService {
@@ -33,14 +31,14 @@ export class TodosService {
   }
 
   removeTodo(id: number) {
-    this.httpClient.post(BACKEND_URL + "/delete", {id: id})
+    this.httpClient.post(environment.apiUrl + "/delete", {id: id})
       .subscribe(response => {
         this.todos = this.todos.filter(t => t.id !== id);
       });
   }
 
   fetchTodos() : Observable<Todo[]> {
-    return this.httpClient.get<Todo[]>(BACKEND_URL + "/get")
+    return this.httpClient.get<Todo[]>(environment.apiUrl + "/get")
       .pipe(tap(todos => this.todos = todos))
   }
 
@@ -55,7 +53,7 @@ export class TodosService {
       done: false
     };
 
-    this.httpClient.post(BACKEND_URL + "/save", formData.value)
+    this.httpClient.post(environment.apiUrl + "/save", formData.value)
       .subscribe(response => {
          this.todos.push(todo);
       });
