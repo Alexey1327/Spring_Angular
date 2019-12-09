@@ -3,8 +3,9 @@
     <div class="input-title-wr">
     <input class="input-title"
       type="text"
-      [placeholder]="!this.formInvalid? 'Введите  заголовок' : 'Заголовок обязателен!'"
       formControlName="title"
+      placeholder="Введите название"
+      #titleInput
     >
     <select formControlName="priority">
       <option
