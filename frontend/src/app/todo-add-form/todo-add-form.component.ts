@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Todo, TodosService} from "../service/todos.service";
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {TodosService} from "../service/todos.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -10,7 +10,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class TodoAddFormComponent implements OnInit {
 
   todoForm: FormGroup;
-  formInvalid: boolean = false;
+
+  @ViewChild("titleInput", {static: false}) el: ElementRef;
 
   constructor(private todosService: TodosService, private formBuilder: FormBuilder) {}
 
@@ -20,11 +21,10 @@ export class TodoAddFormComponent implements OnInit {
 
   addTodo() {
     if (this.todoForm.invalid) {
-      this.formInvalid = true;
+      this.el.nativeElement.focus();
       return;
     }
 
-    this.formInvalid = false;
     this.todosService.saveTodo(this.todoForm);
     this.createForm();
   }
