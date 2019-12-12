@@ -31,8 +31,8 @@ export class TodosService {
   }
 
   removeTodo(id: number) {
-    this.httpClient.post(environment.apiUrl + "/delete", {id: id})
-      .subscribe(response => {
+    this.httpClient.request('delete',environment.apiUrl + "/delete", {body: {id: id}})
+      .subscribe(() => {
         this.todos = this.todos.filter(t => t.id !== id);
       });
   }
@@ -54,7 +54,7 @@ export class TodosService {
     };
 
     this.httpClient.post(environment.apiUrl + "/save", formData.value)
-      .subscribe(response => {
+      .subscribe(() => {
          this.todos.push(todo);
       });
   }
