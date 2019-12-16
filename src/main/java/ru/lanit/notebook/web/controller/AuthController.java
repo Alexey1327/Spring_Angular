@@ -1,14 +1,17 @@
 package ru.lanit.notebook.web.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.lanit.notebook.auth.JwtTokenUtil;
 import ru.lanit.notebook.dto.UserDto;
+import ru.lanit.notebook.entity.User;
 import ru.lanit.notebook.request.JwtRequest;
 import ru.lanit.notebook.service.JwtUserDetailsService;
 import ru.lanit.notebook.service.UserService;
@@ -33,15 +36,20 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/api/authenticate")
     public ResponseEntity createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         try {
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         } catch (Exception e) {
             if (e.getCause() instanceof BadCredentialsException) {
-                // register user
-                this.userService.register(new UserDto(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
-                authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+                try {
+                    userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+                    return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+                } catch (UsernameNotFoundException u) {
+                    // register user
+                    this.userService.register(new UserDto(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+                    authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+                }
             }
         }
 

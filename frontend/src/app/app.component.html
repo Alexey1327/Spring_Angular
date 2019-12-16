@@ -7,10 +7,14 @@
   <span>{{title}}</span>
     <div class="spacer"></div>
 </div>
+
 <div class="container" role="main">
-  <div *ngIf="!todosService.isDetailView">
-    <app-todo-add-form></app-todo-add-form>
-    <app-todo></app-todo>
-  </div>
-  <app-todo-detail *ngIf="todosService.isDetailView"></app-todo-detail>
+  <app-auth></app-auth>
+  <div *ngIf="todosService.isAuthenticated">
+    <div *ngIf="!todosService.isDetailView">
+      <app-todo-add-form></app-todo-add-form>
+      <app-todo></app-todo>
+    </div>
+    <app-todo-detail *ngIf="todosService.isDetailView"></app-todo-detail>
+    </div>
 </div>

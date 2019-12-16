@@ -1,0 +1,20 @@
+<div class="auth-form">
+  <div *ngIf="!todosService.isAuthenticated">
+    <form [formGroup]="authForm" (submit)="authUser()">
+      <div class="input-title-wr">
+        <input class="input-title"
+               type="text"
+               formControlName="username"
+               placeholder="Введите логин"
+        >
+        <input class="input-title"
+               type="password"
+               formControlName="password"
+               placeholder="Введите пароль"
+        >
+      </div>
+      <input type="submit" (submit)="authUser()" value="Залогиниться">
+    </form>
+  </div>
+  <input *ngIf="todosService.isAuthenticated" type="submit" (click)="logout()" value="Разлогиниться">
+</div>

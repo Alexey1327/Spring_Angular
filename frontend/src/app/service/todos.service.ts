@@ -22,6 +22,9 @@ export class TodosService {
   public todos: Todo[] = [];
   public isDetailView = false;
   public selectedTodo: Todo = null;
+  public isAuthenticated = false;
+
+  private authToken: string;
 
   constructor (private httpClient: HttpClient) {}
 
@@ -57,5 +60,17 @@ export class TodosService {
       .subscribe(() => {
          this.todos.push(todo);
       });
+  }
+
+  getAuthToken(): string {
+    return this.authToken;
+  }
+
+  setAuthToken(value: string) {
+    this.authToken = value;
+  }
+
+  setClientAuthenticated(value: boolean) {
+    this.isAuthenticated = value;
   }
 }
