@@ -34,7 +34,7 @@ export class AuthComponent implements OnInit {
         this.todosService.setClientAuthenticated(true);
           this.errorMsg = null;
       },
-        error => {
+        () => {
           this.errorMsg = 'Ошибка авторизации (неверный пароль)';
         }
       );
