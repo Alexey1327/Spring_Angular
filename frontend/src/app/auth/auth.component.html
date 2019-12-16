@@ -16,5 +16,6 @@
       <input type="submit" (submit)="authUser()" value="Залогиниться">
     </form>
   </div>
+  <small class="error-mgs">{{errorMsg}}</small>
   <input *ngIf="todosService.isAuthenticated" type="submit" (click)="logout()" value="Разлогиниться">
 </div>

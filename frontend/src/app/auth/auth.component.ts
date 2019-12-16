@@ -12,6 +12,7 @@ import {HttpClient} from "@angular/common/http";
 export class AuthComponent implements OnInit {
 
   authForm: FormGroup;
+  errorMsg: string;
 
   constructor(private todosService: TodosService, private formBuilder: FormBuilder, private httpClient: HttpClient) {}
 
@@ -31,7 +32,12 @@ export class AuthComponent implements OnInit {
       .subscribe(response => {
         this.todosService.setAuthToken(response.toString());
         this.todosService.setClientAuthenticated(true);
-      });
+          this.errorMsg = null;
+      },
+        error => {
+          this.errorMsg = 'Ошибка авторизации (неверный пароль)';
+        }
+      );
   }
 
   logout() {
