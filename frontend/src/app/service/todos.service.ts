@@ -1,9 +1,10 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import {FormGroup} from "@angular/forms";
 import {environment} from "../../environments/environment";
+import {CookieService} from "ngx-cookie-service";
 
 export interface Todo {
   id: number,
@@ -15,15 +16,21 @@ export interface Todo {
 }
 
 @Injectable({providedIn: "root"})
-export class TodosService {
+export class TodosService implements OnInit{
 
   readonly priorityList = ['Обычный', 'Срочный', 'Попа в огне'];
 
   public todos: Todo[] = [];
   public isDetailView = false;
   public selectedTodo: Todo = null;
+  public isAuthenticated = false;
+
+  private authToken: string;
 
   constructor (private httpClient: HttpClient) {}
+
+  ngOnInit(): void {
+  }
 
   onToggle(id: number) {
     const idx = this.todos.findIndex(t => t.id === id);
@@ -31,8 +38,8 @@ export class TodosService {
   }
 
   removeTodo(id: number) {
-    this.httpClient.post(environment.apiUrl + "/delete", {id: id})
-      .subscribe(response => {
+    this.httpClient.request('delete',environment.apiUrl + "/delete", {body: {id: id}})
+      .subscribe(() => {
         this.todos = this.todos.filter(t => t.id !== id);
       });
   }
@@ -54,8 +61,20 @@ export class TodosService {
     };
 
     this.httpClient.post(environment.apiUrl + "/save", formData.value)
-      .subscribe(response => {
+      .subscribe(() => {
          this.todos.push(todo);
       });
+  }
+
+  getAuthToken(): string {
+    return this.authToken;
+  }
+
+  setAuthToken(value: string) {
+    this.authToken = value;
+  }
+
+  setClientAuthenticated(value: boolean) {
+    this.isAuthenticated = value;
   }
 }

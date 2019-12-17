@@ -17,16 +17,19 @@ public class Note {
     private int priority;
     private LocalDate date;
     private boolean done;
+    @ManyToOne @JoinColumn(name = "user_id")
+    private User user;
 
     public Note() {
     }
 
-    public Note(String title, String text, int priority, LocalDate date, boolean done) {
+    public Note(String title, String text, int priority, LocalDate date, boolean done, User user) {
         this.title = title;
         this.text = text;
         this.priority = priority;
         this.date = date;
         this.done = done;
+        this.user = user;
     }
 
     public long getId() {
@@ -80,6 +83,15 @@ public class Note {
 
     public Note setDone(boolean done) {
         this.done = done;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Note setUser(User user) {
+        this.user = user;
         return this;
     }
 
