@@ -54,5 +54,6 @@ export class AuthComponent implements OnInit {
     this.todosService.setAuthToken(null);
     this.cookieService.delete('auth');
     this.cookieValue = '';
+    this.authForm.reset();
   }
 }
