@@ -11,6 +11,7 @@ import {TodosFilterPipe} from "./service/todos-filter.pipe";
 import { TodoDetailComponent } from './todo-detail/todo-detail.component';
 import { AuthComponent } from './auth/auth.component';
 import {AuthHttpInterceptor} from "./http-interceptor/auth-http.interceptor";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AuthHttpInterceptor} from "./http-interceptor/auth-http.interceptor";
     ReactiveFormsModule
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS, useClass:AuthHttpInterceptor, multi:true}
+    {provide:HTTP_INTERCEPTORS, useClass:AuthHttpInterceptor, multi:true},
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,10 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import {FormGroup} from "@angular/forms";
 import {environment} from "../../environments/environment";
+import {CookieService} from "ngx-cookie-service";
 
 export interface Todo {
   id: number,
@@ -15,7 +16,7 @@ export interface Todo {
 }
 
 @Injectable({providedIn: "root"})
-export class TodosService {
+export class TodosService implements OnInit{
 
   readonly priorityList = ['Обычный', 'Срочный', 'Попа в огне'];
 
@@ -27,6 +28,9 @@ export class TodosService {
   private authToken: string;
 
   constructor (private httpClient: HttpClient) {}
+
+  ngOnInit(): void {
+  }
 
   onToggle(id: number) {
     const idx = this.todos.findIndex(t => t.id === id);

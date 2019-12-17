@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TodosService} from "../service/todos.service";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-auth',
@@ -11,13 +12,20 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AuthComponent implements OnInit {
 
+  private cookieValue: string;
+
   authForm: FormGroup;
   errorMsg: string;
 
-  constructor(private todosService: TodosService, private formBuilder: FormBuilder, private httpClient: HttpClient) {}
+  constructor(private todosService: TodosService, private formBuilder: FormBuilder, private httpClient: HttpClient, private cookieService: CookieService) {}
 
   ngOnInit() {
     this.createForm();
+    this.cookieValue = this.cookieService.get('auth');
+    if (this.cookieValue != '') {
+      this.todosService.setAuthToken(this.cookieValue);
+      this.todosService.isAuthenticated = true;
+    }
   }
 
   private createForm() {
@@ -32,7 +40,8 @@ export class AuthComponent implements OnInit {
       .subscribe(response => {
         this.todosService.setAuthToken(response.toString());
         this.todosService.setClientAuthenticated(true);
-          this.errorMsg = null;
+        this.cookieService.set('auth', response.toString());
+        this.errorMsg = null;
       },
         () => {
           this.errorMsg = 'Ошибка авторизации (неверный пароль)';
@@ -43,5 +52,7 @@ export class AuthComponent implements OnInit {
   logout() {
     this.todosService.isAuthenticated = false;
     this.todosService.setAuthToken(null);
+    this.cookieService.delete('auth');
+    this.cookieValue = '';
   }
 }
