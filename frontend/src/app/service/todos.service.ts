@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import {FormGroup} from "@angular/forms";
 import {environment} from "../../environments/environment";
-import {CookieService} from "ngx-cookie-service";
 
 export interface Todo {
   id: number,

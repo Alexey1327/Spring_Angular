@@ -75,8 +75,10 @@ public class NoteBookController {
 
     @DeleteMapping("/delete")
     public ResponseEntity delete(
-        @RequestBody DeleteRequest request
+        @RequestBody DeleteRequest request,
+        Principal principal
     ) {
+        User user = this.userRepository.findByUsername(principal.getName());
         try {
             noteRepository.deleteById(request.getId());
         } catch (Exception ignored) {}
