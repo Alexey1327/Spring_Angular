@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.lanit.notebook.auth.JwtTokenUtil;
 import ru.lanit.notebook.dto.UserDto;
-import ru.lanit.notebook.entity.User;
 import ru.lanit.notebook.request.JwtRequest;
 import ru.lanit.notebook.service.JwtUserDetailsService;
 import ru.lanit.notebook.service.UserService;
@@ -36,7 +35,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/api/authenticate")
+    @PostMapping("/api/auth/login")
     public ResponseEntity createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         try {
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());

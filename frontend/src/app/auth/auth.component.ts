@@ -36,7 +36,7 @@ export class AuthComponent implements OnInit {
   }
 
   authUser() {
-    this.httpClient.post(environment.apiUrl + "/authenticate", this.authForm.value, {responseType: 'text'})
+    this.httpClient.post(environment.apiUrl + "/auth/login", this.authForm.value, {responseType: 'text'})
       .subscribe(response => {
         this.todosService.setAuthToken(response.toString());
         this.todosService.setClientAuthenticated(true);
