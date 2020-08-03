@@ -16,10 +16,10 @@
     <description>Demo project for Spring Boot and Angular</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.10</maven.compiler.source>
-        <maven.compiler.target>1.10</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <start-class>ru.lanit.notebook.NotebookApplication</start-class>
         <application.name>notebook</application.name>
 
