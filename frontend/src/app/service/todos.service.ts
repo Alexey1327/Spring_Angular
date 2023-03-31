@@ -2,7 +2,7 @@ import {Injectable, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
-import {FormGroup} from "@angular/forms";
+import {UntypedFormGroup} from "@angular/forms";
 import {environment} from "../../environments/environment";
 
 export interface Todo {
@@ -48,7 +48,7 @@ export class TodosService implements OnInit{
       .pipe(tap(todos => this.todos = todos))
   }
 
-  saveTodo(formData: FormGroup) {
+  saveTodo(formData: UntypedFormGroup) {
 
     const todo: Todo = {
       id: Date.now(),

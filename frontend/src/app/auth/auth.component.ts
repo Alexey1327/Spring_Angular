@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {TodosService} from "../service/todos.service";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -14,10 +14,10 @@ export class AuthComponent implements OnInit {
 
   private cookieValue: string;
 
-  authForm: FormGroup;
+  authForm: UntypedFormGroup;
   errorMsg: string;
 
-  constructor(private todosService: TodosService, private formBuilder: FormBuilder, private httpClient: HttpClient, private cookieService: CookieService) {}
+  constructor(private todosService: TodosService, private formBuilder: UntypedFormBuilder, private httpClient: HttpClient, private cookieService: CookieService) {}
 
   ngOnInit() {
     this.createForm();

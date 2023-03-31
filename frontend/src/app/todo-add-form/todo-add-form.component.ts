@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TodosService} from "../service/todos.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-todo-add-form',
@@ -9,11 +9,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class TodoAddFormComponent implements OnInit {
 
-  todoForm: FormGroup;
+  todoForm: UntypedFormGroup;
 
   @ViewChild("titleInput", {static: false}) el: ElementRef;
 
-  constructor(private todosService: TodosService, private formBuilder: FormBuilder) {}
+  constructor(private todosService: TodosService, private formBuilder: UntypedFormBuilder) {}
 
   ngOnInit() {
     this.createForm();
