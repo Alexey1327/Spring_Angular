@@ -9,6 +9,6 @@ import {TodosService} from "./service/todos.service";
 export class AppComponent {
   title = 'Angular + spring demo application';
 
-  constructor(private todosService: TodosService) { }
+  constructor(public todosService: TodosService) { }
 
 }

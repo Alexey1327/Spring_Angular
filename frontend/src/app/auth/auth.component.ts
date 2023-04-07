@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit {
   authForm: UntypedFormGroup;
   errorMsg: string;
 
-  constructor(private todosService: TodosService, private formBuilder: UntypedFormBuilder, private httpClient: HttpClient, private cookieService: CookieService) {}
+  constructor(public todosService: TodosService, private formBuilder: UntypedFormBuilder, private httpClient: HttpClient, private cookieService: CookieService) {}
 
   ngOnInit() {
     this.createForm();

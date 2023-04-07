@@ -13,7 +13,7 @@ export class TodoAddFormComponent implements OnInit {
 
   @ViewChild("titleInput", {static: false}) el: ElementRef;
 
-  constructor(private todosService: TodosService, private formBuilder: UntypedFormBuilder) {}
+  constructor(public todosService: TodosService, private formBuilder: UntypedFormBuilder) {}
 
   ngOnInit() {
     this.createForm();

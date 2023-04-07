@@ -8,7 +8,7 @@ import {CookieService} from "ngx-cookie-service";
 @Injectable({providedIn: 'root'})
 export class AuthHttpInterceptor implements HttpInterceptor {
 
-  constructor(private todosService: TodosService, private cookieService: CookieService) {}
+  constructor(public todosService: TodosService, private cookieService: CookieService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.todosService.isAuthenticated) {
